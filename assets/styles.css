@@ -1,0 +1,53 @@
+body {
+  background-color: black;
+  color: white;
+}
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+#questionCase {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.questions {
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
+  justify-content: center;
+  align-content: center;
+}
+.questions button {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+  background-color: blanchedalmond;
+  color: black;
+  border-radius: 10px;
+}
+.questions button :hover {
+  cursor: pointer;
+}
+
+.btn {
+  background-color: blanchedalmond;
+  color: black;
+  padding: 2% 10%;
+}
+#gameStart {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
