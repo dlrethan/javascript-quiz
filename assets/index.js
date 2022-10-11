@@ -5,14 +5,18 @@ let answerThree = document.getElementById("c");
 let answerFour = document.getElementById("d");
 let question = document.getElementById("question");
 let scoreBoard = document.getElementById("score");
+let questionArea = document.getElementById("questionArea");
+let startButton = document.getElementById("startBtn");
+let endGame = document.getElementById("endGame");
+let currentScore = document.getElementById("currentScore");
 // questions
 const quizQuestions = [
   {
-    question: "How many times can an ID be used?",
-    choiceA: "unlimted",
+    question: "How many times should an ID be used?",
+    choiceA: "2",
     choiceB: "1",
-    choiceC: "420",
-    choiceD: "69",
+    choiceC: "5",
+    choiceD: "3",
     correctAnswer: "b",
   },
   {
@@ -61,8 +65,20 @@ const quizQuestions = [
 let currentQuestionIndex = 0;
 let correct;
 let score = 0;
+let lastQuestionIndex = quizQuestions.length;
+// hide other HTML to start quiz function
+startButton.addEventListener("click", startQuiz);
+function startQuiz() {
+  startButton.classList.add("hidden");
+  questionArea.classList.remove("hidden");
+  generateQuiz();
+}
+
 // generate quiz function
 function generateQuiz() {
+  if (currentQuestionIndex === lastQuestionIndex) {
+    return endQuiz();
+  }
   let currentQuestion = quizQuestions[currentQuestionIndex];
   question.textContent = currentQuestion.question;
   answerOne.textContent = currentQuestion.choiceA;
@@ -70,17 +86,23 @@ function generateQuiz() {
   answerThree.textContent = currentQuestion.choiceC;
   answerFour.textContent = currentQuestion.choiceD;
 }
-generateQuiz();
+
+function endQuiz() {
+  questionArea.classList.add("hidden");
+  endGame.classList.remove("hidden");
+  currentScore.textContent = "Congrats you got " + score + " right!";
+}
+
 // checks answer
 function checkAnswer(answer) {
   correct = quizQuestions[currentQuestionIndex].correctAnswer;
-  if (answer === correct) {
+  if (answer === correct && currentQuestionIndex !== lastQuestionIndex) {
     alert("WooHOO! You got it Right!");
     currentQuestionIndex++;
     generateQuiz();
     score++;
     scoreBoard.textContent = score;
-  } else if (answer !== correct) {
+  } else if (answer !== correct && currentQuestionIndex !== lastQuestionIndex) {
     alert("You'll get them next time!");
     currentQuestionIndex++;
     generateQuiz();
@@ -91,5 +113,7 @@ function checkAnswer(answer) {
       score--;
       scoreBoard.textContent = score;
     }
+  } else {
+    endQuiz();
   }
 }
