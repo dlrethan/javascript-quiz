@@ -33,15 +33,18 @@
         <h1>Points:</h1>
         <p id="score">0</p>
       </div>
+      <!-- input high score -->
       <div class="hidden" class="endingArea" id="endGame">
         <h1 id="currentScore">Congrats You got This Many Right!</h1>
         <form>
-          <label for="input"> Enter Your initials for your HighScore!</label>
-          <input />
-          <button class="btn">submit</button>
+          <label for="input"> Enter Your Name to save your HighScore!</label>
+          <input id="highScoreVal" />
+          <button class="btn" id="submitButton">submit</button>
         </form>
       </div>
-
+      <div class="hidden" class="highScoreArea" id="highScore">
+        <h1>The current Highscores are:</h1>
+      </div>
       <!-- end of quiz area -->
     </div>
     <script src="./assets/index.js"></script>

@@ -9,6 +9,9 @@ let questionArea = document.getElementById("questionArea");
 let startButton = document.getElementById("startBtn");
 let endGame = document.getElementById("endGame");
 let currentScore = document.getElementById("currentScore");
+let input = document.getElementById("highScoreVal");
+let highScoreOutput = document.getElementById("highScore");
+let submitButton = document.getElementById("submitButton");
 // questions
 const quizQuestions = [
   {
@@ -90,7 +93,8 @@ function generateQuiz() {
 function endQuiz() {
   questionArea.classList.add("hidden");
   endGame.classList.remove("hidden");
-  currentScore.textContent = "Congrats you got " + score + " right!";
+  currentScore.textContent =
+    "Congrats you got " + score + " out of " + lastQuestionIndex + " right!";
 }
 
 // checks answer
@@ -115,5 +119,33 @@ function checkAnswer(answer) {
     }
   } else {
     endQuiz();
+  }
+}
+// advent listener for highscore page
+submitButton.onclick = function (event) {
+  event.preventDefault();
+  let savedHighscores =
+    JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  let currentUser = input.value.trim();
+  let currentHighscore = {
+    name: currentUser,
+    score: score,
+  };
+  savedHighscores.push(currentHighscore);
+  localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
+  generateHighScores();
+  endGame.classList.add("hidden");
+  highScoreOutput.classList.remove("hidden");
+};
+// loop to add highscore to highscore page
+function generateHighScores() {
+  var highScores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  for (let i = 0; i < highScores.length; i++) {
+    let newName = document.createElement("li");
+
+    newName.textContent =
+      "Name: " + highScores[i].name + " Score: " + highScores[i].score;
+
+    highScoreOutput.appendChild(newName);
   }
 }
