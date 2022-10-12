@@ -1,6 +1,9 @@
+* {
+  font-family: "Chakra Petch", sans-serif;
+}
 body {
-  background-color: black;
-  color: white;
+  background-color: #193c40;
+  color: #a62b1f;
 }
 .container {
   display: flex;
@@ -20,16 +23,12 @@ body {
   width: 100vh;
   justify-content: center;
   align-content: center;
-}
-
-#startBtn:hover {
-  cursor: pointer;
-  border-color: white;
+  height: 100vh;
 }
 
 .btn {
-  background-color: blanchedalmond;
-  color: black;
+  background-color: #2e5902;
+  color: #d96941;
   padding: 2% 10%;
   display: flex;
   justify-content: center;
@@ -38,8 +37,6 @@ body {
   flex-direction: column;
   padding: 10px;
   margin: 5px;
-  background-color: blanchedalmond;
-  color: black;
   border-radius: 10px;
   width: 100vh;
 }
@@ -63,8 +60,11 @@ body {
 .startGame {
   display: flex;
 }
-.endingArea {
+
+.timer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-bottom: 5px;
 }

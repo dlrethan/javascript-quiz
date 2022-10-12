@@ -12,6 +12,8 @@ let currentScore = document.getElementById("currentScore");
 let input = document.getElementById("highScoreVal");
 let highScoreOutput = document.getElementById("highScore");
 let submitButton = document.getElementById("submitButton");
+let timeLeft = document.getElementById("timer");
+
 // questions
 const quizQuestions = [
   {
@@ -39,7 +41,7 @@ const quizQuestions = [
     correctAnswer: "a",
   },
   {
-    question: "How many data types reside in java?",
+    question: "How many data types reside in JavaScript?",
     choiceA: "3",
     choiceB: "2",
     choiceC: "1",
@@ -69,12 +71,29 @@ let currentQuestionIndex = 0;
 let correct;
 let score = 0;
 let lastQuestionIndex = quizQuestions.length;
+let time = 40;
 // hide other HTML to start quiz function
 startButton.addEventListener("click", startQuiz);
 function startQuiz() {
   startButton.classList.add("hidden");
   questionArea.classList.remove("hidden");
   generateQuiz();
+  clock();
+}
+function clock() {
+  var timer = setInterval(() => {
+    timeLeft.textContent = "Time: " + time;
+    time--;
+
+    if (time < 0) {
+      time.textContent = "Time: 0";
+      endQuiz();
+      clearInterval(timer);
+    }
+    if (currentQuestionIndex === lastQuestionIndex) {
+      clearInterval(timer);
+    }
+  }, 1000);
 }
 
 // generate quiz function
@@ -110,13 +129,6 @@ function checkAnswer(answer) {
     alert("You'll get them next time!");
     currentQuestionIndex++;
     generateQuiz();
-    // prevents score from going below 0
-    if (score <= 0) {
-      score = 0;
-    } else {
-      score--;
-      scoreBoard.textContent = score;
-    }
   } else {
     endQuiz();
   }
