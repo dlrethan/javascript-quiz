@@ -122,15 +122,13 @@ function checkAnswer(answer) {
   if (answer === correct && currentQuestionIndex !== lastQuestionIndex) {
     alert("WooHOO! You got it Right!");
     currentQuestionIndex++;
-    generateQuiz();
     score++;
+    generateQuiz();
     scoreBoard.textContent = score;
-  } else if (answer !== correct && currentQuestionIndex !== lastQuestionIndex) {
+  } else {
     alert("You'll get them next time!");
     currentQuestionIndex++;
     generateQuiz();
-  } else {
-    endQuiz();
   }
 }
 // advent listener for highscore page
@@ -152,12 +150,11 @@ submitButton.onclick = function (event) {
 // loop to add highscore to highscore page
 function generateHighScores() {
   var highScores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
-  for (let i = 0; i < highScores.length; i++) {
+  let sortedScores = highScores.sort((a, b) => b.score - a.score);
+  for (let i = 0; i < sortedScores.length; i++) {
     let newName = document.createElement("li");
-
     newName.textContent =
-      "Name: " + highScores[i].name + " Score: " + highScores[i].score;
-
+      "Name: " + sortedScores[i].name + " Score: " + sortedScores[i].score;
     highScoreOutput.appendChild(newName);
   }
 }
